@@ -2,13 +2,8 @@
 <DevInfor>
     <!--
     	说明：
-    	
-    	1、表格中的第一项
-    		<ShareSDK 
-        		AppKey="api20" />
-    	是必须的，其中的AppKey是您在ShareSDK上注册的开发者帐号的AppKey
-    	
-    	2、所有集成到您项目的平台都应该为其在表格中填写相对应的开发者信息，以新浪微博为例：
+
+    	所有集成到您项目的平台都应该为其在表格中填写相对应的开发者信息，以新浪微博为例：
     	    <SinaWeibo
                 Id="1"
                 SortId="1"
@@ -24,8 +19,6 @@
     	
     	各个平台注册应用信息的地址如下：
 			新浪微博        http://open.weibo.com
-			腾讯微博        http://dev.t.qq.com
-			QQ空间          http://connect.qq.com/intro/login/
 			微信好友        http://open.weixin.qq.com
 			Facebook       https://developers.facebook.com
 			Twitter        https://dev.twitter.com
@@ -48,23 +41,27 @@
 			VKontakte      http://vk.com/dev
 			易信好友        http://open.yixin.im/
 			明道	           http://open.mingdao.com/
-			Line           http://media.line.me/zh-hant/
+			Line           http://media.line.me/zh-hant/  https://developers.line.me
 			Pocket         http://getpocket.com/developer/apps/new
 			KakaoTalk      https://developers.kakao.com/
 			KakaoStory     https://developers.kakao.com/
+			Plurk          http://www.plurk.com/API
     -->
-    
-    <ShareSDK 
-        AppKey = "1fb5268eabf5b"/> <!-- 修改成你在sharesdk后台注册的应用的appkey"-->
-    
-    <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
+
+    <!-- ShareByAppClient标识是否使用微博客户端分享，默认是false, -->
+	<!-- 1、ShareByWebApi是否使用新街口，true是使用新浪API接口分享，false为新浪H5网页分享
+		 2、用户分享到微博的文本内容，必须做URLencode，内容不超过140个汉字，文本中不能包含“#话题词#”，同时文本中必须包含至少一个第三方分享到微博的网页URL，
+		且该URL只能是该第三方（调用方）绑定域下的URL链接，绑定域在“我的应用 － 应用信息 － 基本应用信息编辑 － 安全域名”里设置。-->
+	<!--在ShareByAppClient为false，ShareByWebApi = "false"时，分享会调用Web页面分享{调用web分享，需集成res资源文件，以及libs下的so库}，
+		在ShareByAppClient为false，ShareByWebApi = "true"时，会走API方式分享-->
     <SinaWeibo
         Id="1"
         SortId="1"
-        AppKey="3275362030"
-        AppSecret="03c3531444515aaa08da3e9f9b4f91ac"
+        AppKey="568898243"
+        AppSecret="38a4f8204cc784f81f9f0daaf31e02e3"
         RedirectUrl="http://www.sharesdk.cn"
         ShareByAppClient="true"
+		ShareByWebApi = "false"
         Enable="true" />
 
     <TencentWeibo
@@ -78,8 +75,9 @@
     <QZone
         Id="3"
         SortId="3"
-        AppId="1106159498"
-        AppKey="PNS9I2VUqd4oB9dg"
+        AppId="100371282"
+        AppKey="aed9b0303e3ed1e27bae87c33761161d"
+		BypassApproval="true"
         Enable="true" />
     
     <!-- 
@@ -92,38 +90,42 @@
 		
 		BypassApproval是绕过审核的标记，设置为true后AppId将被忽略，故不经过
 		审核的应用也可以执行分享，但是仅限于分享文字和图片，不能分享其他类型，
-		默认值为false。此外，微信收藏不支持此字段。
+		默认值为false。此外，微信收藏不支持此字段。wx4868b35061f87885
 	-->
+	<!--要分享微信小应用程序时用userName,path-->
     <Wechat
         Id="4"
         SortId="4"
-        AppId="wxd26ccc9b6faa0fb7"
-        AppSecret="35f7f5a62983e23a5da4704fee59a314"
-        BypassApproval="false"
+        AppId="wx4868b35061f87885"
+        AppSecret="64020361b8ec4c99936c0e3999a9f249"
+		userName="gh_afb25ac019c9"
+		path="pages/index/index.html?id=1"
+        BypassApproval="true"
         Enable="true" />
     
     <WechatMoments
         Id="5"
         SortId="5"
-        AppId="wxd26ccc9b6faa0fb7"
-        AppSecret="35f7f5a62983e23a5da4704fee59a314"
-        BypassApproval="false"
+        AppId="wx4868b35061f87885"
+        AppSecret="64020361b8ec4c99936c0e3999a9f249"
+        BypassApproval="true"
         Enable="true" />
         
 	<WechatFavorite
         Id="6"
         SortId="6"
-        AppId="wxd26ccc9b6faa0fb7"
-        AppSecret="35f7f5a62983e23a5da4704fee59a314"
+        AppId="wx4868b35061f87885"
+        AppSecret="64020361b8ec4c99936c0e3999a9f249"
         Enable="true" />
     
 	<!-- ShareByAppClient标识是否使用微博客户端分享，默认是false -->
 	<QQ
         Id="7"
         SortId="7"
-		AppId="1106194960"
-		AppKey="z1KFcVQ33VOspNfy"
-        ShareByAppClient="true"
+        AppId="100371282"
+        AppKey="aed9b0303e3ed1e27bae87c33761161d"
+        ShareByAppClient ="true"
+		BypassApproval = "false"
         Enable="true" />
     
     <Facebook
@@ -131,8 +133,9 @@
         SortId="8"
         ConsumerKey="107704292745179"
         ConsumerSecret="38053202e1a5fe26c80c753071f0b573"
-        RedirectUrl="http://mob.com"
-        Enable="true" />
+        RedirectUrl="fbconnect://success"
+		ShareByAppClient="true"
+		Enable="true" />
 
     <Twitter
         Id="9"
@@ -210,11 +213,15 @@
         ApiKey="ejo5ibkye3vo"
         SecretKey="cC7B2jpxITqPLZ5M" 
         RedirectUrl="http://sharesdk.cn"
+		ShareByAppClient="false"
         Enable="true" />
     
      <GooglePlus
     	Id="21"
         SortId="21"
+        ClientID="236300675100-am5pm8km7md1memjevq8rl9pg5c4s4b8.apps.googleusercontent.com"
+        RedirectUrl="http://localhost"
+        ShareByAppClient = "true"
         Enable="true" />
      
      <FourSquare
@@ -244,7 +251,7 @@
         SortId="25"
         OAuthConsumerKey="2QUXqO9fcgGdtGG1FcvML6ZunIQzAEL8xY6hIaxdJnDti2DYwM"
 		SecretKey="3Rt0sPFj7u2g39mEVB3IBpOzKnM3JnTtxX2bao2JKk4VV1gtNo"
-		CallbackUrl="http://sharesdk.cn"
+		CallbackUrl="http://www.sharesdk.cn"
         Enable="true" />
  
 	<Dropbox
@@ -306,6 +313,8 @@
 	<Line
 	    Id="32"
         SortId="32"
+        ChannelID = "1477692153"
+        ChannelSecret ="f30c036370f2e04ade71c52eef73a9af"
         Enable="true" />
 	
 	<KakaoTalk
@@ -350,8 +359,39 @@
         Enable="true" />
     
      <Alipay
-        Id="52"
-        SortId="52"  
+        Id="50"
+        SortId="50"  
         AppId="2015072400185895"
         Enable="true"/>
+     
+     <AlipayMoments
+        Id="51"
+        SortId="51"  
+        AppId="2015072400185895"
+        Enable="true"/>
+     
+     <Dingding
+        Id="52"
+        SortId="52"
+        AppId="dingoanxyrpiscaovl4qlw"
+        BypassApproval="false"
+        Enable="true"/>
+
+    <Youtube
+        Id="53"
+        SortId="53"
+        ClientID="370141748022-bicrnsjfiije93bvdt63dh3728m4shas.apps.googleusercontent.com"
+        AppSecret="AIzaSyAO06g-0TDpHcsXXO918a7QE3Zdct2bB5E"
+        RedirectUrl="http://localhost"
+        ShareByAppClient = "true"
+        Enable="true" />
+	
+	<Meipai
+		Id="54"
+		SortId="54"
+		ClientID="1089867596"
+		AppSecret="y9ym6rrjjijtkt23qtsc"
+		ShareByAppClient = "true"
+		Enable="true"/>
+	
 </DevInfor>

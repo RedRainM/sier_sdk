@@ -18,8 +18,7 @@ import com.mhy.siersdk.tools.Utils;
 
 public class PayUtils {
 
-    private static Context context = SierSdk.context;
-    private static Handler mHandler = SierSdk.handler;
+
     private static final String content = "正在拉取支付...";
     /**
      * 支付宝支付
@@ -30,13 +29,13 @@ public class PayUtils {
             @Override
             public void run() {
                 //构造paytask对象
-                PayTask alipay=new PayTask((Activity) context);
+                PayTask alipay=new PayTask((Activity) SierSdk.getContext());
                 //调用支付接口，获取支付结果
                 String result=alipay.pay(data,true);
                 Message msg=new Message();
                 msg.what= Costant.PAY_ZFB;
                 msg.obj=result;
-                mHandler.sendMessage(msg);
+                SierSdk.getHandler().sendMessage(msg);
             }
         }).start();
     }

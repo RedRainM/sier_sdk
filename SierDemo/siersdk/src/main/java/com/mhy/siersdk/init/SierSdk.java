@@ -2,6 +2,7 @@ package com.mhy.siersdk.init;
 
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
 import com.mob.MobSDK;
 
@@ -16,11 +17,30 @@ public class SierSdk {
     public static Context context;
     public static Handler handler;
 
-    public SierSdk() {
+    private SierSdk() {
+        throw new UnsupportedOperationException("u can\'t instantiate me...");
     }
-    public static void init(Context context,Handler handler) {
-        SierSdk.context = context;
+
+    public static void init(Context var0,Handler handler) {
         SierSdk.handler = handler;
-        MobSDK.init(context);
+        //初始化shareSDK
+        MobSDK.init(var0);
+        SierSdk.context = var0.getApplicationContext();
+        Log.d(TAG,"initSuccess");
+    }
+
+    public static Handler getHandler() {
+        if(context != null) {
+            return handler;
+        } else {
+            throw new NullPointerException("u should init first");
+        }
+    }
+    public static Context getContext() {
+        if(context != null) {
+            return context;
+        } else {
+            throw new NullPointerException("u should init first");
+        }
     }
 }

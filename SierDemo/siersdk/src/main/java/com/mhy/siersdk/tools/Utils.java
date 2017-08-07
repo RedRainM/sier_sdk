@@ -15,11 +15,10 @@ public class Utils {
 
     private static XLoadingDialog xLoadingDialog;
 
-    private static Context context = SierSdk.context;
 
     public static void dialogShow(String title) {
 
-        xLoadingDialog = XLoadingDialog.with(context)
+        xLoadingDialog = XLoadingDialog.with(SierSdk.getContext())
                 .setCanceled(false) //设置手动不可取消
                 .setOrientation(XLoadingDialog.HORIZONTAL) //设置显示方式（水平或者垂直）
                 .setBackgroundColor(Color.parseColor("#aa000000"))//设置对话框背景

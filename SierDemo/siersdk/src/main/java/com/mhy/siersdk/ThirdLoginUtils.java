@@ -1,8 +1,6 @@
 package com.mhy.siersdk;
 
 
-import android.content.Context;
-import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
@@ -32,8 +30,6 @@ public class ThirdLoginUtils {
 
 
     private static final String content = "正在拉取登录权限...";
-    private static Handler handler = SierSdk.handler;
-    private static Context context = SierSdk.context;
 
 
     /**
@@ -50,7 +46,7 @@ public class ThirdLoginUtils {
         wechat.SSOSetting(true);
 
         if (!wechat.isClientValid()) {
-            Toast.makeText(context,"微信未安装,请先安装微信",Toast.LENGTH_LONG).show();
+            Toast.makeText(SierSdk.getContext(),"微信未安装,请先安装微信",Toast.LENGTH_LONG).show();
         }
         authorize(wechat);
     }
@@ -102,7 +98,7 @@ public class ThirdLoginUtils {
                 Message message = new Message();
                 message.what = Costant.LOGIN_SUCCESS;
                 message.obj = platform.getDb().exportData();
-                handler.sendMessage(message);
+                SierSdk.getHandler().sendMessage(message);
             }
         }
 
@@ -116,7 +112,7 @@ public class ThirdLoginUtils {
                 Message message = new Message();
                 message.what = Costant.LOGIN_FAIL;
                 message.obj = platform.getDb().exportData();
-                handler.sendMessage(message);
+                SierSdk.getHandler().sendMessage(message);
             }
             throwable.printStackTrace();
         }
@@ -131,7 +127,7 @@ public class ThirdLoginUtils {
                 Message message = new Message();
                 message.what = Costant.LOGIN_CANCEL;
                 message.obj = platform.getDb().exportData();
-                handler.sendMessage(message);
+                SierSdk.getHandler().sendMessage(message);
             }
         }
     };

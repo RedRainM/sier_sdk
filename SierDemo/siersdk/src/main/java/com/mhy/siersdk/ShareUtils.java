@@ -35,8 +35,6 @@ public class ShareUtils {
 
     private static final String content = "正在拉取分享...";
 
-    public static Handler sHandler = SierSdk.handler;
-
     /**
      * 空间分享
      */
@@ -160,7 +158,7 @@ public class ShareUtils {
         pengyouquan.setPlatformActionListener(platformActionListener);
         pengyouquan.share(shareParams);
     }
-  /**
+    /**
      * GooglePlus分享
      */
     public static void GooglePlus(ShareInfo shareBean) {
@@ -188,7 +186,7 @@ public class ShareUtils {
             Log.e(TAG,"分享成功");
             Message msg = new Message();
             msg.what = Costant.SHARE_SUCCESS;
-            sHandler.sendMessage(msg);
+            SierSdk.getHandler().sendMessage(msg);
         }
 
         @Override
@@ -201,7 +199,7 @@ public class ShareUtils {
             Log.e(TAG,"分享失败");
             Message msg = new Message();
             msg.what = Costant.SHARE_FAIL;
-            sHandler.sendMessage(msg);
+            SierSdk.getHandler().sendMessage(msg);
             Log.e("分享失败原因",throwable.toString());
         }
 
@@ -212,7 +210,7 @@ public class ShareUtils {
             Log.e(TAG,"分享取消");
             Message msg = new Message();
             msg.what = Costant.SHARE_CANCEL;
-            sHandler.sendMessage(msg);
+            SierSdk.getHandler().sendMessage(msg);
         }
     };
 
